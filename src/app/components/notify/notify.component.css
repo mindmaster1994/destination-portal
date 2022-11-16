@@ -1,0 +1,14 @@
+.notify {
+   
+    border:0;
+
+    z-index: 99999999;
+}
+.notify a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: transparent;
+    border: 0;
+    box-shadow: 0 0 9px 1px #d1d1d1;
+}

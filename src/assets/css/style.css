@@ -1,0 +1,59 @@
+.ml-20{
+    margin-left:20px;
+}
+.mt-20{
+    margin-top:20px;
+}
+.mt-50{
+    margin-top:50px;
+}
+.login-btn{
+    float:right;
+    margin-right: 20px;
+}
+.active-link{
+    font-weight: bold;
+}
+.content{
+    padding: 50px;
+}
+.fa-heart-filled:before {
+    content: "\f08a";
+}
+.card-title .fa{
+    padding:5px;
+    cursor: pointer;
+}
+.destinations-container{
+    display: flex;flex-wrap:wrap;column-gap: 10px;row-gap: 10px;
+}
+.dialog-form {
+    width: 340px;
+    margin: 50px auto;
+  	font-size: 15px;
+}
+.dialog-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.dialog-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.form-control{
+    margin:10px 0;
+}
+.btn {        
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.alert{
+    padding: 0 !important;
+    color: red !important;
+}

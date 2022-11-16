@@ -1,0 +1,6 @@
+<div *ngIf="notifyService.shown" style="position:fixed;width:100%;height:100%;background-color:#00000080;top:0;left:0;z-index:999999999;display:flex;justify-content: center;align-items: center;">
+  <div  class="button-group notify">
+    <a style="width: 300px;height:150px;border-radius:12px;background-color: #232631;margin-left: 5px;color: white;" class="btn btn-default"><img src="/assets/images/loader1.gif" style="width: 40px;" /><span style="padding-left: 10px;text-transform: capitalize;" class="title">{{notifyService.message}}</span></a>
+  </div>
+</div>
+

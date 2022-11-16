@@ -1,0 +1,13 @@
+<div class="card" style="width: 18rem;">
+    <img src="/assets/images/placeholder.png" class="card-img-top" alt="Placeholder">
+    <div class="card-body">
+      <h5 class="card-title">{{item.title}}  
+        <i class="fa fa-edit" (click)="edit(item)"></i>
+        <i style="float: right;" class="fa fa-heart-filled"></i>
+    </h5>
+      
+      <p class="card-text">{{item.locationName}}</p>
+
+      <button class="btn btn-danger" (click)="deleteDestination(item.id)">Delete</button>
+    </div>
+</div>

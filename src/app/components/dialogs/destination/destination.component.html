@@ -1,0 +1,40 @@
+<div class="dialog-form">
+    <form #customForm="ngForm" (ngSubmit)="save()">
+        <h2 class="text-center">Add Destination</h2>       
+        <div class="form-group">
+            <input [(ngModel)]="payload.title" maxlength="40" #title="ngModel" name="title" type="text" class="form-control" placeholder="Title" required="required">
+            <div *ngIf="title.invalid && (title.dirty || title.touched)"
+                class="alert">
+
+                <div *ngIf="title.errors?.['required']">
+                    Name is required.
+                </div>
+                <div *ngIf="title.errors?.['maxlength']">
+                    Name must be at most 40 characters long.
+                </div>
+    
+            </div>
+        </div>
+        <div class="form-group">
+            <input [(ngModel)]="payload.locationName" maxlength="40" #locationName="ngModel" name="locationName" type="text" class="form-control" placeholder="Location Name" required="required">
+            <div *ngIf="locationName.invalid && (locationName.dirty || locationName.touched)"
+                class="alert">
+
+                <div *ngIf="locationName.errors?.['required']">
+                    Location Name is required.
+                </div>
+                <div *ngIf="locationName.errors?.['maxlength']">
+                    Location Name must be at most 40 characters long.
+                </div>
+    
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="file" class="form-control">
+        </div>
+        <div class="form-group text-center mt-20">
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </div>
+          
+    </form>
+  </div>

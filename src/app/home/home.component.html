@@ -1,0 +1,13 @@
+<main>
+    <div class="destinations-container">
+        <ng-container *ngFor="let item of destinations | paginate: { itemsPerPage: page.size, currentPage: page.pageNumber, totalItems: page.totalElements }">
+            <app-destination-card [item]="item" (OnDelete)="onDelete()">
+
+            </app-destination-card>
+        </ng-container>
+    </div>
+    <div class="mt-50 text-center">
+        <pagination-controls (pageChange)="onNextPage($event)"></pagination-controls>
+    </div>
+</main>
+
