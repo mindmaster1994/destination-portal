@@ -15,6 +15,9 @@ export class AuthService {
 
     private userSubject = new Subject<any>();
 
+    favourites = [];
+    favouriteIds = [];
+
     constructor(public jwtHelper: JwtHelperService, private apiService:APIService, private router:Router) {}
     
     public isAuthenticated(): boolean {
@@ -27,6 +30,29 @@ export class AuthService {
         return this.apiService.post("/users/signin",payload);
     }
 
+    public getFavouriteDestinations() {
+        return this.apiService.get("/users/favouriteDestinations")
+            .subscribe(response => {
+                console.log(response);
+                if(response.success){
+                    if(response.data == undefined){
+                        this.favourites = [];
+                        this.favouriteIds = [];
+                        return;
+                    }
+
+                    this.favourites = response.data;
+                    
+                    if(this.favourites.length == 0){
+                        this.favouriteIds = [];
+                        return;
+                    }
+
+                    this.favouriteIds = this.favourites.map(item => item.id);
+                }
+            });
+    }
+
     public getUserToken(){
         const token = localStorage.getItem("token");
 
@@ -37,7 +63,9 @@ export class AuthService {
         this.currentUser = null;
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        this.router.navigate(["/login"]);
+        this.userSubject.next(null);
+        window.location.reload();
+       
     }
 
     public getCurrentUser():Observable<any>{
@@ -60,29 +88,14 @@ export class AuthService {
     public isLoggedIn(){
         var user = localStorage.getItem("user");
         if(user == null){
-            this.logout();
             return;
         }
 
         this.currentUser = JSON.parse(user);
-
+        this.getFavouriteDestinations();
         this.userSubject.next(this.currentUser);
     }
 
-    public sendEmailAddress(data: any) : Observable<any> {
-        return this.apiService.post("/users/reset-password/init",data);
-    }
-
-    setOtp(otp:any) {
-        this.otp = otp;
-    }
-
-    getOtp(): any {
-        return this.otp;
-    }
-
-    public sendResetRequest(data: any) : Observable<any> {
-        return this.apiService.post("/users/reset-password/finish", data);
-    }
+   
 
 }

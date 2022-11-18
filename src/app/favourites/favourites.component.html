@@ -1,1 +1,12 @@
-<p>favourites works!</p>
+<main>
+    <div class="destinations-container">
+        <div *ngIf="!authService.favourites.length">No any favourite destinations found.</div>
+        <ng-container *ngFor="let item of authService.favourites">
+            <app-destination-card [item]="item">
+
+            </app-destination-card>
+        </ng-container>
+    </div>
+    
+</main>
+

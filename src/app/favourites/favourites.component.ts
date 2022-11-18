@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/api/auth/auth.service';
 
 @Component({
   selector: 'app-favourites',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavouritesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService:AuthService) { }
 
   ngOnInit(): void {
   }
-
 }

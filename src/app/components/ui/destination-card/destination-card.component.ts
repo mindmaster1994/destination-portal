@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/api/auth/auth.service';
+import { Constants } from 'src/api/constants/constants';
 import { DestinationService } from 'src/api/services/destination.service';
 import { DestinationComponent } from '../../dialogs/destination/destination.component';
 
@@ -16,7 +18,9 @@ export class DestinationCardComponent implements OnInit {
   @Output()
   OnDelete = new EventEmitter();
 
-  constructor(private modalService:NgbModal, private destinationService:DestinationService) { }
+  uploadPath = Constants.UPLOAD_PATH;
+
+  constructor(private modalService:NgbModal, private destinationService:DestinationService, public authService:AuthService) { }
 
   ngOnInit(): void {
   }
@@ -32,8 +36,33 @@ export class DestinationCardComponent implements OnInit {
   deleteDestination(id){
     this.destinationService.delete(id)
       .subscribe(response => {
-        this.OnDelete.emit();
+        var index = this.authService.favouriteIds.indexOf(id);
+        this.authService.favouriteIds.splice(index, 1);
+        this.authService.favourites.splice(index, 1);
+        
+        this.OnDelete.emit(id);
       });    
   }
 
+  markFavourite(){
+    var id = this.item.id;
+    this.destinationService.markFavourite(id)
+      .subscribe(response => {
+        console.log(response);
+        if(response.success){
+          this.authService.getFavouriteDestinations();
+        }
+      })
+  }
+
+  UnmarkFavourite(){
+    var id = this.item.id;
+    this.destinationService.UnmarkFavourite(id)
+      .subscribe(response => {
+        console.log(response);
+        if(response.success){
+          this.authService.getFavouriteDestinations();
+        }
+      })
+  }
 }

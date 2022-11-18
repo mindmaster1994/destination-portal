@@ -37,7 +37,9 @@ export function tokenGetter() {
       },
     }),
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-center',
+    }),
     NgbModule,
   ],
   providers: [

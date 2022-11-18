@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
+import { AuthService } from 'src/api/auth/auth.service';
 import { DestinationComponent } from 'src/app/components/dialogs/destination/destination.component';
 
 import { LoginComponent } from 'src/app/components/dialogs/login/login.component';
@@ -12,8 +13,17 @@ import { LoginComponent } from 'src/app/components/dialogs/login/login.component
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private modalService:NgbModal) {
-  
+  currentUser:any = null;
+
+  constructor(private modalService:NgbModal, public authService:AuthService) {
+    
+
+    this.authService.getCurrentUser()
+      .subscribe(user => {
+        this.currentUser = user;
+      });
+
+      this.authService.isLoggedIn();
   }
 
   ngOnInit(): void {

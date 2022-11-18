@@ -1,9 +1,11 @@
 <div class="card" style="width: 18rem;">
-    <img src="/assets/images/placeholder.png" class="card-img-top" alt="Placeholder">
+    <img *ngIf="item.image == null" src="/assets/images/placeholder.png" class="card-img-top" alt="Placeholder">
+    <img *ngIf="item.image != null" src="{{uploadPath + item.image}}" style="max-width: 286px;max-height: 186px;" class="card-img-top" alt="Placeholder">
     <div class="card-body">
       <h5 class="card-title">{{item.title}}  
         <i class="fa fa-edit" (click)="edit(item)"></i>
-        <i style="float: right;" class="fa fa-heart-filled"></i>
+        <i *ngIf="!authService.favouriteIds.includes(item.id)" style="float: right;" (click)="markFavourite()" class="fa fa-heart-filled"></i>
+        <i *ngIf="authService.favouriteIds.includes(item.id)" style="float: right;color:red;" (click)="UnmarkFavourite()" class="fa fa-heart"></i>
     </h5>
       
       <p class="card-text">{{item.locationName}}</p>

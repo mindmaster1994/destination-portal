@@ -10,11 +10,9 @@ import { HomeComponent } from "./home.component";
 @NgModule({
     declarations: [
       HomeComponent,
-      LoginComponent
     ],
     exports: [
         HomeComponent,
-        LoginComponent
     ],
     imports: [
         CommonModule, 

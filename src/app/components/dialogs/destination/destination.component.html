@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="file" class="form-control">
+            <input type="file" class="form-control" (change)="handleFile($event)">
         </div>
         <div class="form-group text-center mt-20">
             <button type="submit" class="btn btn-primary btn-block">Save</button>

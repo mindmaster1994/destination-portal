@@ -1,5 +1,6 @@
 <main>
     <div class="destinations-container">
+        <div *ngIf="!destinations.length">No any destinations found.</div>
         <ng-container *ngFor="let item of destinations | paginate: { itemsPerPage: page.size, currentPage: page.pageNumber, totalItems: page.totalElements }">
             <app-destination-card [item]="item" (OnDelete)="onDelete()">
 

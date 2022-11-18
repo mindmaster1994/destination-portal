@@ -15,37 +15,28 @@ export class DestinationService {
     constructor(private apiService:APIService, private router:Router){
     }
 
-    public get() {
-        return this.apiService.get("/users/listing?page=0&size=10&sortby=id&order=asc")
-            .subscribe(response => {
-                if(response.success) {
-                    this.destinations = response.result;
-                }
-            });
+    public markFavourite(id){
+        return this.apiService.put(`/destinations/mark-favourite?id=${id}`,{});
     }
 
-    public getById(id) {
-        return this.apiService.get(`/users/${id}`);
+    public UnmarkFavourite(id){
+        return this.apiService.put(`/destinations/unmark-favourite?id=${id}`,{});
     }
 
-    public save(data:any) {
+    public save(data:any,file) {
+
+        var formData = new FormData();
+        formData.append("payload", new Blob([JSON.stringify(data)],{
+            type: "application/json"
+        }));
+        formData.append("file",file);
+
         if(data.id == undefined){
-            return this.apiService.post("/destinations/create",data);
+            return this.apiService.post("/destinations/create",formData);
         }
         else{
-            return this.apiService.put("/destinations/update",data);
+            return this.apiService.put("/destinations/update",formData);
         }
-    }
-
-    public update(data:any) {
-        return this.apiService.put("/users",data)
-            .subscribe(response => {
-                console.log(response);
-                if(response.success) {
-                    
-                    this.router.navigate(["/view-users"]);
-                }
-            });
     }
 
     public delete(id){
@@ -63,5 +54,7 @@ export class DestinationService {
 
     getDestinationObservable(){
         return this.OnDestinationCreationSubject.asObservable();
-      }
+    }
+
+    
 }

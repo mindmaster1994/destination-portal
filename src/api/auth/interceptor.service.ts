@@ -12,7 +12,7 @@ import { AuthService } from "./auth.service";
 export class InterceptorService implements HttpInterceptor {
     token: any;
     omitCalls = ['signin','create','listing','delete'];
-    omitNotify = [];
+    omitNotify = ['favouriteDestinations'];
     skipInterceptor = false;
     constructor(private router: Router, private authService:AuthService, private notifyService:NotifyService, private toasterService:ToastrService) { }
 
@@ -27,6 +27,7 @@ export class InterceptorService implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+      this.skipInterceptor = false;
       if(req.method == "GET"){
         this.notifyService.showNotify("Fetching Data");
       }

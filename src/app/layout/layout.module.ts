@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { DestinationComponent } from "../components/dialogs/destination/destination.component";
+import { LoginComponent } from "../components/dialogs/login/login.component";
 import { HeaderComponent } from "./header/header.component";
 
 @NgModule({
@@ -18,7 +19,8 @@ import { HeaderComponent } from "./header/header.component";
     ],
     declarations:[
         HeaderComponent,
-        DestinationComponent
+        DestinationComponent,
+        LoginComponent
     ]
 })
 export class LayoutModule{}

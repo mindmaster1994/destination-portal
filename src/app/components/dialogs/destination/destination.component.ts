@@ -19,6 +19,8 @@ export class DestinationComponent implements OnInit {
 
   @Input()
   payload:DestinationPayload = new DestinationPayload();
+
+  logo = null;
   
   constructor(private activeModal:NgbActiveModal, private destinationService:DestinationService, private router:Router,private toasterService:ToastrService) { }
 
@@ -26,8 +28,14 @@ export class DestinationComponent implements OnInit {
     
   }
 
+  handleFile(event){
+    var files = event.target.files;
+    if(files.length > 0)
+      this.logo = files[0];
+  }
+
   save(){
-    this.destinationService.save(this.payload)
+    this.destinationService.save(this.payload, this.logo)
       .subscribe(response => {
         
         this.activeModal.close();
