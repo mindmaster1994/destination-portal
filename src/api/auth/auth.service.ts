@@ -5,6 +5,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { Observable, Subject } from "rxjs";
 import { environment } from "src/environments/environment";
 import { APIService } from "../api.service";
+import { WebsocketService } from "../services/websocket.service";
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,7 @@ export class AuthService {
     favourites = [];
     favouriteIds = [];
 
-    constructor(public jwtHelper: JwtHelperService, private apiService:APIService, private router:Router) {}
+    constructor(public jwtHelper: JwtHelperService, private apiService:APIService, private router:Router, private websocketService:WebsocketService) {}
     
     public isAuthenticated(): boolean {
       const token:any = localStorage.getItem('token');
@@ -49,6 +50,8 @@ export class AuthService {
                     }
 
                     this.favouriteIds = this.favourites.map(item => item.id);
+
+                    this.websocketService._send({favourites:this.favouriteIds});
                 }
             });
     }
@@ -92,7 +95,14 @@ export class AuthService {
         }
 
         this.currentUser = JSON.parse(user);
-        this.getFavouriteDestinations();
+
+        this.websocketService.getConnectionAsObservable()
+            .subscribe(response => {
+                this.getFavouriteDestinations();
+            });
+
+        this.websocketService._connect();
+
         this.userSubject.next(this.currentUser);
     }
 

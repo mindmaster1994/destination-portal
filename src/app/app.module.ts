@@ -15,6 +15,7 @@ import { AuthService } from 'src/api/auth/auth.service';
 import { APIService } from 'src/api/api.service';
 import { NotifyService } from './components/notify/notify-service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WebsocketService } from 'src/api/services/websocket.service';
 
 
 export function tokenGetter() {
@@ -52,7 +53,7 @@ export function tokenGetter() {
      APIService,
      AuthService,
      DestinationService,
-     
+     WebsocketService
      
   ],
   bootstrap: [AppComponent]
