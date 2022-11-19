@@ -12,7 +12,7 @@ import { AuthService } from "./auth.service";
 export class InterceptorService implements HttpInterceptor {
     token: any;
     omitCalls = ['signin','create','listing','delete'];
-    omitNotify = ['favouriteDestinations'];
+    omitNotify = ['signin','favouriteDestinations'];
     skipInterceptor = false;
     constructor(private router: Router, private authService:AuthService, private notifyService:NotifyService, private toasterService:ToastrService) { }
 
@@ -106,7 +106,8 @@ export class InterceptorService implements HttpInterceptor {
                }
 
                if(evt.body && evt.body.success){
-                this.toasterService.success(evt.body.result);
+                if(!this.omitNotifyFunc(req))
+                  this.toasterService.success(evt.body.result);
                }
                   
             }            

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           this.authService.setCurrentUser(user);
           this.activeModal.close();
           
-          this.authService.getFavouriteDestinations();
+          this.authService.isLoggedIn();
         }
       })
   }

@@ -43,6 +43,13 @@ export class WebsocketService {
         this.stompClient.send("/app/store", {}, JSON.stringify(message));
     }
 
+    _disconnect() {
+        if (this.stompClient !== null) {
+            this.stompClient.disconnect();
+        }
+        console.log("Disconnected");
+    }
+
     onMessageReceived(message) {
         console.log("Message Recieved : " + message);
         this.toasterService.success(JSON.stringify(message.body));

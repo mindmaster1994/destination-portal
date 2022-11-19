@@ -67,6 +67,7 @@ export class AuthService {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         this.userSubject.next(null);
+        this.websocketService._disconnect();
         window.location.reload();
        
     }
